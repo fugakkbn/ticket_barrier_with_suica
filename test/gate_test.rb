@@ -34,4 +34,13 @@ class GateTest < Minitest::Test
     @juso.enter(ticket)
     assert @mikuni.exit(ticket)
   end
+
+  def test_umeda_to_juso_when_balance_is_1000
+    suica = Suica.new(1000)
+    @umeda.enter_by_suica(suica)
+    # 現在上がっている提案
+    # assert_equl 840 @juso.exit_by_suica(suica)
+    assert @juso.exit_by_suica(suica)
+    assert_equal 840, suica.balance
+  end
 end
