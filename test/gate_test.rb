@@ -14,26 +14,26 @@ class GateTest < Minitest::Test
 
   def test_umeda_to_juso
     ticket = Ticket.new(160)
-    @umeda.enter(ticket)
-    assert @juso.exit(ticket)
+    @umeda.enter_by_ticket(ticket)
+    assert @juso.exit_by_ticket(ticket)
   end
 
   def test_umeda_to_mikuni_when_fare_is_not_enough
     ticket = Ticket.new(160)
-    @umeda.enter(ticket)
-    refute @mikuni.exit(ticket)
+    @umeda.enter_by_ticket(ticket)
+    refute @mikuni.exit_by_ticket(ticket)
   end
 
   def test_umeda_to_mikuni_when_fare_is_enough
     ticket = Ticket.new(190)
-    @umeda.enter(ticket)
-    assert @mikuni.exit(ticket)
+    @umeda.enter_by_ticket(ticket)
+    assert @mikuni.exit_by_ticket(ticket)
   end
 
   def test_juso_to_mikuni
     ticket = Ticket.new(160)
-    @juso.enter(ticket)
-    assert @mikuni.exit(ticket)
+    @juso.enter_by_ticket(ticket)
+    assert @mikuni.exit_by_ticket(ticket)
   end
 
   def test_umeda_to_juso_when_balance_is_1000

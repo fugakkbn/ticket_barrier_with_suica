@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Ticket
-  attr_reader :fare, :stamped_at
+  attr_reader :fare, :entered_at
 
   def initialize(fare)
     @fare = fare
   end
 
-  def stamp(name)
-    @stamped_at = name
+  def enter(name)
+    @entered_at = name
   end
 end
