@@ -8,26 +8,27 @@ class Gate
     @name = name
   end
 
-  def enter(ticket)
-    ticket.stamp(@name)
+  def enter_by_ticket(ticket)
+    ticket.enter(@name)
   end
 
   def enter_by_suica(suica)
-
+    suica.enter(@name)
   end
 
   def exit_by_suica(suica)
-    suica.discharge(160)
+    fare = calc_fare(suica.entered_at)
+    suica.discharge(fare)
     suica.balance
   end
 
-  def exit(ticket)
-    fare = calc_fare(ticket)
+  def exit_by_ticket(ticket)
+    fare = calc_fare(ticket.entered_at)
     fare <= ticket.fare
   end
 
-  def calc_fare(ticket)
-    from = STATIONS.index(ticket.stamped_at)
+  def calc_fare(entered_at)
+    from = STATIONS.index(entered_at)
     to = STATIONS.index(@name)
     distance = to - from
     FARES[distance - 1]
