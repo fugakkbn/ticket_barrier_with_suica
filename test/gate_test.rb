@@ -52,5 +52,4 @@ class GateTest < Minitest::Test
     refute @juso.exit_by_suica(suica)
     assert_equal 100, suica.balance
   end
-
 end
