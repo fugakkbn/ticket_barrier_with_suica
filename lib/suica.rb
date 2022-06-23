@@ -6,7 +6,11 @@ class Suica
   end
 
   def discharge(fare)
-    @balance -= fare
+    if @balance >= fare
+      @balance -= fare
+    else
+      false
+    end
   end
 
   def enter(name)

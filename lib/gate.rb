@@ -19,7 +19,6 @@ class Gate
   def exit_by_suica(suica)
     fare = calc_fare(suica.entered_at)
     suica.discharge(fare)
-    suica.balance
   end
 
   def exit_by_ticket(ticket)

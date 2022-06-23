@@ -43,4 +43,13 @@ class GateTest < Minitest::Test
     assert_equal 840, @juso.exit_by_suica(suica)
     assert_equal 840, suica.balance
   end
+
+  # 残高が100円ありチャージせず梅田駅で乗車し十三駅で降車 -> 出場できない
+  def test_umeda_to_juso_when_balance_is_100
+    suica = Suica.new(100)
+    @umeda.enter_by_suica(suica)
+    assert_equal 100, suica.balance
+    refute @juso.exit_by_suica(suica)
+    assert_equal 100, suica.balance
+  end
 end
