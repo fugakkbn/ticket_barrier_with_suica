@@ -5,9 +5,9 @@ class Suica
     @balance = balance
   end
 
-  def discharge(fare)
-    if @balance >= fare
-      @balance -= fare
+  def discharge(amount)
+    if @balance >= amount
+      @balance -= amount
     else
       false
     end
