@@ -52,4 +52,14 @@ class GateTest < Minitest::Test
     refute @juso.exit_by_suica(suica)
     assert_equal 100, suica.balance
   end
+
+  def test_umeda_to_juso_when_charge_is_1000
+    suica = Suica.new(0)
+    suica.charge(1000)
+    assert_equal 1000, suica.balance
+    @umeda.enter_by_suica(suica)
+    assert_equal 1000, suica.balance
+    assert_equal 840, @juso.exit_by_suica(suica)
+    assert_equal 840, suica.balance
+  end
 end

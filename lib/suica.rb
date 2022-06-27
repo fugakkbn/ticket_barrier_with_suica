@@ -13,6 +13,10 @@ class Suica
     end
   end
 
+  def charge(amount)
+    @balance += amount
+  end
+
   def enter(name)
     @entered_at = name
   end
