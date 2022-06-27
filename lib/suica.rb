@@ -5,6 +5,7 @@ class Suica
     @balance = balance
   end
 
+  # TODO: マイナスの金額が渡ってきた場合を考慮する
   def discharge(amount)
     if @balance >= amount
       @balance -= amount
@@ -13,6 +14,7 @@ class Suica
     end
   end
 
+  # TODO: マイナスの金額が渡ってきた場合を考慮する
   def charge(amount)
     @balance += amount
   end
