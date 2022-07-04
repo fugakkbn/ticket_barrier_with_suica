@@ -72,4 +72,35 @@ class GateTest < Minitest::Test
     refute @juso.exit_by_suica(suica)
     assert_equal 159, suica.balance
   end
+
+  def test_umeda_to_juso_and_juso_to_mikuni_when_charge_is_320
+    suica = Suica.new(320)
+    @umeda.enter_by_suica(suica)
+    assert_equal 320, suica.balance
+    assert_equal 160, @juso.exit_by_suica(suica)
+    @juso.enter_by_suica(suica)
+    assert_equal 160, suica.balance
+    assert_equal 0, @mikuni.exit_by_suica(suica)
+  end
+
+  def test_umeda_to_juso_and_juso_to_mikuni_when_charge_is_319
+    suica = Suica.new(319)
+    @umeda.enter_by_suica(suica)
+    assert_equal 319, suica.balance
+    assert_equal 159, @juso.exit_by_suica(suica)
+    @juso.enter_by_suica(suica)
+    assert_equal 159, suica.balance
+    refute @mikuni.exit_by_suica(suica)
+    assert_equal 159, suica.balance
+  end
+
+  def test_umeda_to_juso_charge_before_exit
+    suica = Suica.new(0)
+    @umeda.enter_by_suica(suica)
+    assert_equal 0, suica.balance
+    refute @juso.exit_by_suica(suica)
+    suica.charge(160)
+    assert_equal 160, suica.balance
+    assert_equal 0, @juso.exit_by_suica(suica)
+  end
 end
